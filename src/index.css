@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -33,7 +37,16 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  background: #1B2837;
+  background: #1b2837;
+  background: radial-gradient(
+    circle,
+    rgb(105, 120, 138) 0%,
+    rgb(86, 106, 133) 5%,
+    rgb(78, 99, 128) 10%,
+    rgb(61, 82, 109) 20%,
+    rgb(47, 67, 94) 30%,
+    rgb(20, 31, 46) 100%
+  );
 }
 /*
   6. Improve media defaults
@@ -73,4 +86,21 @@ h6 {
 #root,
 #__next {
   isolation: isolate;
+}
+
+.swiper-pagination {
+  bottom: -3.5rem !important;
+}
+
+.swiper-pagination-bullet {
+  width: 0.938rem !important;
+  height: 0.938rem !important;
+  margin: 0 0.6rem 0.25rem !important;
+  background: #fff !important;
+  opacity: 0.5 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #fff !important;
+  opacity: 1 !important;
 }
