@@ -20,10 +20,10 @@ const App = () => {
   const theme = useMantineTheme();
 
   useEffect(() => {
-    getData();
+    fetchData();
   }, []);
 
-  const getData = async () => {
+  const fetchData = async () => {
     try {
       setLoading(true);
 
@@ -34,9 +34,11 @@ const App = () => {
       }
 
       if (data.length) {
-        setData(data);
-        getRandomGames(data, 6);
-        console.log(data);
+        const games = sortById(data);
+        setData(games);
+        const randomGames = getRandomGames(data, 6);
+        setCarouselGames(randomGames);
+        console.log(games);
       }
     } catch (error) {
       alert(error.message);
@@ -57,7 +59,13 @@ const App = () => {
       const uniqueRandomIndex = uniqueIndexList.splice(randomIndex, 1);
       listRandomGames.push(games[uniqueRandomIndex]);
     }
-    setCarouselGames(listRandomGames);
+    return listRandomGames;
+  };
+
+  const sortById = (games) => {
+    return games.sort((a, b) => {
+      return a.id - b.id;
+    });
   };
 
   return (
@@ -115,6 +123,7 @@ const App = () => {
         overlayColor={theme.colors.primary[12]}
         visible={loading}
       />
+
       <Carousel games={carouselGames} />
     </AppShell>
   );
