@@ -27,6 +27,7 @@ code {
 html,
 body {
   height: 100%;
+  overflow-x: hidden;
 }
 /*
   Typographic tweaks!
@@ -88,19 +89,29 @@ h6 {
   isolation: isolate;
 }
 
-.swiper-pagination {
-  bottom: -3.5rem !important;
+.rippleEffect {
+  width: 2px;
+  height: 2px;
+  position: absolute;
+  background: #eee;
+  display: block;
+  content: "";
+  border-radius: 100%;
+  opacity: 1;
+  animation: 0.5s ease 1 forwards ripple-effect;
 }
 
-.swiper-pagination-bullet {
-  width: 0.938rem !important;
-  height: 0.938rem !important;
-  margin: 0 0.6rem 0.25rem !important;
-  background: #fff !important;
-  opacity: 0.5 !important;
-}
-
-.swiper-pagination-bullet-active {
-  background: #fff !important;
-  opacity: 1 !important;
+@keyframes ripple-effect {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(5);
+    opacity: 0.375;
+  }
+  100% {
+    transform: scale(35);
+    opacity: 0;
+  }
 }

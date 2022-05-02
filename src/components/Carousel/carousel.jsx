@@ -4,6 +4,7 @@ import { Navigation, Pagination, EffectCoverflow, Autoplay } from "swiper";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/scss";
 import "swiper/scss/pagination";
+import "./carousel.scss";
 
 function Carousel(props) {
   const { games } = props;
@@ -40,7 +41,8 @@ function Carousel(props) {
       scrollbar={{ draggable: true }}
       className="w-[130rem] mt-10 cursor-grab h-96 select-none"
       style={{
-        overflow: "visible",
+        overflowX: "clip",
+        overflowY: "visible",
         transform: `translateX(-${offsetTranslate}%)`,
       }}
     >

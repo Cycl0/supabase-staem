@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { supabase } from "./supabaseClient";
 import {
   AppShell,
@@ -17,6 +17,8 @@ const App = () => {
   const [data, setData] = useState([]);
   const [carouselGames, setCarouselGames] = useState([]);
   const [loading, setLoading] = useState(false);
+  const installButton = useRef();
+  const [buttonClicked, setButtonClicked] = useState(false);
   const theme = useMantineTheme();
 
   useEffect(() => {
@@ -68,6 +70,26 @@ const App = () => {
     });
   };
 
+  const installButtonClick = (event) => {
+    //ripple effect on button
+    const installButton = event.currentTarget;
+    const ripple = document.createElement("span");
+    installButton.appendChild(ripple);
+    const { left, top } = installButton.getBoundingClientRect();
+    ripple.style.top = event.clientY - top - ripple.offsetHeight / 2 + "px";
+    ripple.style.left = event.clientX - left - ripple.offsetWidth / 2 + "px";
+    ripple.classList.add("rippleEffect");
+    setTimeout(() => {
+      installButton.removeChild(ripple);
+      setButtonClicked(true);
+    }, 500);
+  };
+
+  useEffect(() => {
+    window.open("https://store.steampowered.com/about/");
+    setButtonClicked(false);
+  }, [buttonClicked]);
+
   return (
     <AppShell
       padding="md"
@@ -93,11 +115,21 @@ const App = () => {
               STAEM
             </Title>
             <Button
+              ref={installButton}
+              onClick={(event) => {
+                installButtonClick(event);
+              }}
               radius="xl"
               size="md"
               sx={(theme) => ({
-                backgroundColor: `${theme.colors.primary[5]} !important`,
                 padding: "0 40px",
+                backgroundColor: `${theme.colors.primary[5]} !important`,
+                transition: "all 0.3s ease-in-out",
+                transitionProperty: "opacity, transform",
+                "&:hover": {
+                  opacity: "0.8",
+                  transform: "scale(1.05)",
+                },
               })}
             >
               <InstallIcon />
