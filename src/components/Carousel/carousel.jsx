@@ -27,23 +27,24 @@ function Carousel(props) {
 
   const activeSlide = (game) => {
     return (
-      <MakeAnimated
-        className="slider-container"
-        animation="ripple"
-        size={20}
-        delay={500}
-        action={() => {
-          if (isCurrent) {
-            window.open(game.link);
-          } else {
-            // wait for animation to finish
-            setTimeout(() => {
-              setIsCurrent(true);
-            }, 500);
-          }
-        }}
-      >
-        <div className="min-w-[51.3rem] h-full transition-all duration-300 ease-in-out opacity-90 hover:opacity-100 hover:scale-105">
+      <div className="min-w-[51.3rem] h-full transition-all duration-300 ease-in-out opacity-90 hover:opacity-100 hover:scale-105">
+        <MakeAnimated
+          className="slider-container"
+          animation="flash"
+          color="#fff"
+          size={20}
+          delay={500}
+          action={() => {
+            if (isCurrent) {
+              window.open(game.link);
+            } else {
+              // wait for animation to finish
+              setTimeout(() => {
+                setIsCurrent(true);
+              }, 500);
+            }
+          }}
+        >
           <img
             src={game.image}
             alt={game.title}
@@ -53,8 +54,8 @@ function Carousel(props) {
             }}
             draggable="false"
           />
-        </div>
-      </MakeAnimated>
+        </MakeAnimated>
+      </div>
     );
   };
 
