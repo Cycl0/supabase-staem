@@ -23,7 +23,6 @@ function Carousel(props) {
   const [isCurrent, setIsCurrent] = useState(false);
 
   const size = useWindowSize();
-  const offsetTranslate = 21 - (size.width / 64 - 20) + 5960 / size.width;
 
   const activeSlide = (game) => {
     return (
@@ -124,7 +123,8 @@ function Carousel(props) {
       className="w-[130rem] mt-10 cursor-grab h-96 select-none"
       style={{
         overflow: "visible",
-        transform: `translateX(-${offsetTranslate}%)`,
+        left: "49%",
+        transform: "translateX(-50.7%)",
       }}
     >
       {games.map((game, index) => {

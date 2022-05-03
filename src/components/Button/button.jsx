@@ -33,7 +33,7 @@ function CustomButton(props) {
     <MakeAnimated
       className="button-container overflow-hidden rounded-2xl"
       animation="ripple"
-      color="#eee"
+      color="#fff"
       size={5}
       delay={500}
       action={onButtonClick}

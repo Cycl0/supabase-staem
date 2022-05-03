@@ -9,7 +9,7 @@ function CustomAppshell(props) {
       padding="md"
       header={header}
       sx={(theme) => ({
-        maxWidth: "80%",
+        maxWidth: "95%",
         margin: "0 auto",
         minHeight: "100vh",
         paddingBottom: "140px",

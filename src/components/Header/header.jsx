@@ -8,7 +8,6 @@ function CustomHeader(props) {
     <Header
       height={160}
       pt="xs"
-      px="xl"
       sx={(theme) => ({
         background: "transparent",
         border: "none",

@@ -14,7 +14,6 @@ export const MakeAnimated = ({
 
   useEffect(() => {
     setElementClicked(false);
-    console.log("clicked");
     if (action) {
       action();
     }
