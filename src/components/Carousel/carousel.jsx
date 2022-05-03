@@ -20,7 +20,7 @@ function Carousel(props) {
     setSwiper(document.querySelector(".swiper").swiper);
   }, []);
 
-  const [isCurrent, setIsCurrent] = useState(false);
+  const [isCurrent, setIsCurrent] = useState(true);
 
   const size = useWindowSize();
 
@@ -36,11 +36,6 @@ function Carousel(props) {
           action={() => {
             if (isCurrent) {
               window.open(game.link);
-            } else {
-              // wait for animation to finish
-              setTimeout(() => {
-                setIsCurrent(true);
-              }, 500);
             }
           }}
         >
@@ -108,6 +103,10 @@ function Carousel(props) {
       }}
       onSlideChange={() => {
         setIsCurrent(false);
+        // wait for animation to finish
+        setTimeout(() => {
+          setIsCurrent(true);
+        }, 500);
       }}
       speed={500}
       centeredSlides={true}

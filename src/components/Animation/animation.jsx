@@ -13,8 +13,8 @@ export const MakeAnimated = ({
   const [elementClicked, setElementClicked] = useState(false);
 
   useEffect(() => {
-    setElementClicked(false);
-    if (action) {
+    if (elementClicked) {
+      setElementClicked(false);
       action();
     }
   }, [elementClicked]);
