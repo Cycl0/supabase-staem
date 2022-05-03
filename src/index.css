@@ -88,30 +88,3 @@ h6 {
 #__next {
   isolation: isolate;
 }
-
-.rippleEffect {
-  width: 2px;
-  height: 2px;
-  position: absolute;
-  background: #eee;
-  display: block;
-  content: "";
-  border-radius: 100%;
-  opacity: 1;
-  animation: 0.5s ease 1 forwards ripple-effect;
-}
-
-@keyframes ripple-effect {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(5);
-    opacity: 0.375;
-  }
-  100% {
-    transform: scale(35);
-    opacity: 0;
-  }
-}

@@ -1,15 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
-import {
-  AppShell,
-  Header,
-  Button,
-  Grid,
-  Text,
-  Title,
-  useMantineTheme,
-  LoadingOverlay,
-} from "@mantine/core";
+import { Text, Title } from "@mantine/core";
+import AppShell from "./components/Appshell/appshell.jsx";
+import Header from "./components/Header/header";
+import Button from "./components/Button/button";
 import { ReactComponent as InstallIcon } from "./assets/installIcon.svg";
 import Carousel from "./components/Carousel/carousel";
 
@@ -17,9 +11,6 @@ const App = () => {
   const [data, setData] = useState([]);
   const [carouselGames, setCarouselGames] = useState([]);
   const [loading, setLoading] = useState(false);
-  const installButton = useRef();
-  const [buttonClicked, setButtonClicked] = useState(false);
-  const theme = useMantineTheme();
 
   useEffect(() => {
     fetchData();
@@ -61,6 +52,7 @@ const App = () => {
       const uniqueRandomIndex = uniqueIndexList.splice(randomIndex, 1);
       listRandomGames.push(games[uniqueRandomIndex]);
     }
+
     return listRandomGames;
   };
 
@@ -70,92 +62,27 @@ const App = () => {
     });
   };
 
-  const installButtonClick = (event) => {
-    //ripple effect on button
-    const installButton = event.currentTarget;
-    const ripple = document.createElement("span");
-    installButton.appendChild(ripple);
-    const { left, top } = installButton.getBoundingClientRect();
-    ripple.style.top = event.clientY - top - ripple.offsetHeight / 2 + "px";
-    ripple.style.left = event.clientX - left - ripple.offsetWidth / 2 + "px";
-    ripple.classList.add("rippleEffect");
-    setTimeout(() => {
-      installButton.removeChild(ripple);
-      setButtonClicked(true);
-    }, 500);
-  };
-
-  useEffect(() => {
-    window.open("https://store.steampowered.com/about/");
-    setButtonClicked(false);
-  }, [buttonClicked]);
-
   return (
     <AppShell
-      padding="md"
+      loading={loading}
       header={
-        <Header
-          height={160}
-          pt="xs"
-          px="xl"
-          sx={(theme) => ({
-            background: "transparent",
-            border: "none",
-          })}
-        >
-          <Grid
-            justify="space-between"
-            align="center"
-            p="xl"
-            style={{ height: "100%" }}
+        <Header>
+          <Title
+            style={{ fontWeight: "700", fontSize: "40px", color: "white" }}
           >
-            <Title
-              style={{ fontWeight: "700", fontSize: "40px", color: "white" }}
-            >
-              STAEM
-            </Title>
-            <Button
-              ref={installButton}
-              onClick={(event) => {
-                installButtonClick(event);
-              }}
-              radius="xl"
-              size="md"
-              sx={(theme) => ({
-                padding: "0 40px",
-                backgroundColor: `${theme.colors.primary[5]} !important`,
-                transition: "all 0.3s ease-in-out",
-                transitionProperty: "opacity, transform",
-                "&:hover": {
-                  opacity: "0.8",
-                  transform: "scale(1.05)",
-                },
-              })}
-            >
-              <InstallIcon />
-              <Text ml="sm">Install</Text>
-            </Button>
-          </Grid>
+            STAEM
+          </Title>
+          <Button
+            onButtonClick={() =>
+              window.open("https://store.steampowered.com/about/")
+            }
+          >
+            <InstallIcon />
+            <Text ml="sm">Install</Text>
+          </Button>
         </Header>
       }
-      sx={(theme) => ({
-        maxWidth: "80%",
-        margin: "0 auto",
-        minHeight: "100vh",
-        paddingBottom: "140px",
-      })}
     >
-      <LoadingOverlay
-        loaderProps={{
-          size: "xl",
-          color: theme.colors.primary[12],
-          variant: "bars",
-        }}
-        overlayOpacity={0.1}
-        overlayColor={theme.colors.primary[12]}
-        visible={loading}
-      />
-
       <Carousel games={carouselGames} />
     </AppShell>
   );
