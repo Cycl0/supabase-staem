@@ -42,7 +42,7 @@ function Carousel(props) {
           <img
             src={game.image}
             alt={game.title}
-            className="w-full h-full object-cover rounded-3xl select-none"
+            className="w-full h-full object-cover rounded-3xl select-none transiton-all duration-300 ease-in-out"
             style={{
               boxShadow: "0px 13px 50px 6px hsl(0deg 0% 0% / 0.34)",
             }}
@@ -59,7 +59,7 @@ function Carousel(props) {
         onClick={() => {
           swiper.slideNext(500);
         }}
-        className="h-80"
+        className="h-80 transiton-all duration-300 ease-in-out"
       >
         <img
           src={game.image}
@@ -77,7 +77,7 @@ function Carousel(props) {
         onClick={() => {
           swiper.slidePrev(500);
         }}
-        className="h-80"
+        className="h-80 transiton-all duration-300 ease-in-out"
       >
         <img
           src={game.image}
