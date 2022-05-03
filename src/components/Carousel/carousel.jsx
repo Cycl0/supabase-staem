@@ -135,7 +135,7 @@ function Carousel(props) {
             {({ isActive, isNext, isVisible }) => {
               if (isVisible) {
                 if (isActive) {
-                  return <MakeAnimated>{activeSlide(game)}</MakeAnimated>;
+                  return activeSlide(game);
                 } else if (isNext) {
                   return nextSlide(game);
                 } else {
