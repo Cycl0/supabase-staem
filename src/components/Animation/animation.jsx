@@ -15,7 +15,9 @@ export const MakeAnimated = ({
   useEffect(() => {
     if (elementClicked) {
       setElementClicked(false);
-      action();
+      if (action) {
+        action();
+      }
     }
   }, [elementClicked]);
 
@@ -71,7 +73,7 @@ export const MakeAnimated = ({
 
   return (
     <div
-      className={className}
+      className={className || "animated-container"}
       style={{ position: "relative", transition: "all 0.5s ease" }}
       onClick={(event) => onClick(event)}
     >

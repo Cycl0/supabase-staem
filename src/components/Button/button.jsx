@@ -11,7 +11,8 @@ const StyledButton = (props) => {
       radius="xl"
       size="md"
       sx={(theme) => ({
-        padding: "0 40px",
+        height: "40px",
+        padding: "0 30px",
         backgroundColor: `${theme.colors.primary[5]} !important`,
         transition: "all 0.3s ease-in-out",
         transitionProperty: "opacity, transform",

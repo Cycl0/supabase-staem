@@ -10,6 +10,16 @@
   opacity: 0.5 !important;
 }
 
+@media (max-width: 767px) {
+  .swiper-pagination-bullet {
+    width: 0.625rem !important;
+    height: 0.625rem !important;
+    margin: 0 0.5rem 1.5rem !important;
+    background: #fff !important;
+    opacity: 0.5 !important;
+  }
+}
+
 .swiper-pagination-bullet-active {
   background: #fff !important;
   opacity: 1 !important;

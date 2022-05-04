@@ -7,7 +7,7 @@ import {
   Autoplay,
   A11y,
 } from "swiper";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { MakeAnimated } from "../Animation/animation";
 import "swiper/scss";
 import "swiper/scss/pagination";
@@ -26,7 +26,10 @@ function Carousel(props) {
 
   const activeSlide = (game) => {
     return (
-      <div className="min-w-[51.3rem] h-full transition-all duration-300 ease-in-out opacity-90 hover:opacity-100 hover:scale-105">
+      <div
+        className="w-0 min-w-[51.3rem] transition-all duration-300 ease-in-out opacity-90 hover:opacity-100 hover:scale-105"
+        style={size.width <= 920 ? { minWidth: size.width * 0.8 + "px" } : {}}
+      >
         <MakeAnimated
           className="slider-container"
           animation="flash"
@@ -42,7 +45,7 @@ function Carousel(props) {
           <img
             src={game.image}
             alt={game.title}
-            className="w-full h-full object-cover rounded-3xl select-none transiton-all duration-300 ease-in-out"
+            className="w-full object-cover rounded-3xl select-none transiton-all duration-300 ease-in-out"
             style={{
               boxShadow: "0px 13px 50px 6px hsl(0deg 0% 0% / 0.34)",
             }}
@@ -59,12 +62,13 @@ function Carousel(props) {
         onClick={() => {
           swiper.slideNext(500);
         }}
-        className="h-80 transiton-all duration-300 ease-in-out"
+        className="w-0 min-w-[51.3rem] transiton-all duration-300 ease-in-out"
+        style={size.width <= 920 ? { minWidth: size.width * 0.8 + "px" } : {}}
       >
         <img
           src={game.image}
           alt={game.title}
-          className="w-full h-full object-cover rounded-3xl opacity-50 hover:opacity-100 hover:scale-105 transition-all duration-300 ease-in-out select-none"
+          className="w-full object-cover rounded-3xl opacity-50 hover:opacity-100 hover:scale-105 transition-all duration-300 ease-in-out select-none"
           draggable="false"
         />
       </div>
@@ -77,12 +81,13 @@ function Carousel(props) {
         onClick={() => {
           swiper.slidePrev(500);
         }}
-        className="h-80 transiton-all duration-300 ease-in-out"
+        className="w-0 min-w-[51.3rem] transiton-all duration-300 ease-in-out"
+        style={size.width <= 920 ? { minWidth: size.width * 0.8 + "px" } : {}}
       >
         <img
           src={game.image}
           alt={game.title}
-          className="w-full h-full object-cover rounded-3xl opacity-50 hover:opacity-100 hover:scale-105 transition-all duration-300 ease-in-out select-none"
+          className="w-full object-cover rounded-3xl opacity-50 hover:opacity-100 hover:scale-105 transition-all duration-300 ease-in-out select-none"
           draggable="false"
         />
       </div>
@@ -94,13 +99,13 @@ function Carousel(props) {
       effect="coverflow"
       modules={[Autoplay, Navigation, Pagination, EffectCoverflow, A11y]}
       slidesPerView={3}
-      spaceBetween={250}
+      spaceBetween={470}
       rewind={true}
-      autoplay={{
-        delay: 3500,
-        disableOnInteraction: false,
-        pauseOnMouseEnter: true,
-      }}
+      //autoplay={{
+      //delay: 3500,
+      //disableOnInteraction: false,
+      //pauseOnMouseEnter: true,
+      //}}
       onSlideChange={() => {
         setIsCurrent(false);
         // wait for animation to finish
@@ -119,7 +124,7 @@ function Carousel(props) {
       }}
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
-      className="w-[130rem] mt-10 cursor-grab h-96 select-none"
+      className="w-[130rem] h-auto xl:m-10 sm:m-0 cursor-grab h-96 select-none"
       style={{
         overflow: "visible",
         left: "49%",
@@ -128,22 +133,24 @@ function Carousel(props) {
     >
       {games.map((game, index) => {
         return (
-          <SwiperSlide
-            key={index}
-            className="cursor-pointer h-full flex justify-center items-center"
-          >
-            {({ isActive, isNext, isVisible }) => {
-              if (isVisible) {
-                if (isActive) {
-                  return activeSlide(game);
-                } else if (isNext) {
-                  return nextSlide(game);
-                } else {
-                  return prevSlide(game);
+          <MakeAnimated animation="ripple" color="#fff" size={2} delay={500}>
+            <SwiperSlide
+              key={index}
+              className="cursor-pointer h-full flex justify-center items-center"
+            >
+              {({ isActive, isNext, isVisible }) => {
+                if (isVisible) {
+                  if (isActive) {
+                    return activeSlide(game);
+                  } else if (isNext) {
+                    return nextSlide(game);
+                  } else {
+                    return prevSlide(game);
+                  }
                 }
-              }
-            }}
-          </SwiperSlide>
+              }}
+            </SwiperSlide>
+          </MakeAnimated>
         );
       })}
     </Swiper>
