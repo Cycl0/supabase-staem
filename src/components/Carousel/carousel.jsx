@@ -126,7 +126,8 @@ function Carousel(props) {
       }}
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
-      className="w-[130rem] h-auto xl:m-10 sm:m-0 cursor-grab  select-none"
+      className="w-[130rem] h-auto xl:m-10 sm:m-0 cursor-grab select-none"
+      // duplicating style objects otherwise values won't be updated
       style={size.width <= 920 ? {
           // setting dynamic slide minHeight from slide width (80% of the screen width)
           minHeight: size.width * 0.8 * SLIDE_WIDTH_HEIGHT_RATIO + "px",
