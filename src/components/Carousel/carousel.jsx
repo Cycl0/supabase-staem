@@ -27,7 +27,7 @@ function Carousel(props) {
   const activeSlide = (game) => {
     return (
       <div
-        className="w-0 min-w-[51.3rem] transition-all duration-300 ease-in-out opacity-90 hover:opacity-100 hover:scale-105"
+        className="w-0 min-w-[51.3rem] transition-all duration-300 ease-linear opacity-90 hover:opacity-100 hover:scale-105"
         style={size.width <= 920 ? { minWidth: size.width * 0.8 + "px" } : {}}
       >
         <MakeAnimated
@@ -45,7 +45,7 @@ function Carousel(props) {
           <img
             src={game.image}
             alt={game.title}
-            className="w-full object-cover rounded-3xl select-none transiton-all duration-300 ease-in-out"
+            className="w-full object-cover rounded-3xl select-none transiton-all duration-300 ease-linear"
             style={{
               boxShadow: "0px 13px 50px 6px hsl(0deg 0% 0% / 0.34)",
             }}
@@ -62,13 +62,13 @@ function Carousel(props) {
         onClick={() => {
           swiper.slideNext(500);
         }}
-        className="w-0 min-w-[51.3rem] transiton-all duration-300 ease-in-out"
+        className="w-0 min-w-[51.3rem] transiton-all duration-300 ease-linear"
         style={size.width <= 920 ? { minWidth: size.width * 0.8 + "px" } : {}}
       >
         <img
           src={game.image}
           alt={game.title}
-          className="w-full object-cover rounded-3xl opacity-50 hover:opacity-100 hover:scale-105 transition-all duration-300 ease-in-out select-none"
+          className="w-full object-cover rounded-3xl opacity-50 hover:opacity-100 hover:scale-105 transition-all duration-300 ease-linear select-none"
           draggable="false"
         />
       </div>
@@ -81,18 +81,20 @@ function Carousel(props) {
         onClick={() => {
           swiper.slidePrev(500);
         }}
-        className="w-0 min-w-[51.3rem] transiton-all duration-300 ease-in-out"
+        className="w-0 min-w-[51.3rem] transiton-all duration-300 ease-linear"
         style={size.width <= 920 ? { minWidth: size.width * 0.8 + "px" } : {}}
       >
         <img
           src={game.image}
           alt={game.title}
-          className="w-full object-cover rounded-3xl opacity-50 hover:opacity-100 hover:scale-105 transition-all duration-300 ease-in-out select-none"
+          className="w-full object-cover rounded-3xl opacity-50 hover:opacity-100 hover:scale-105 transition-all duration-300 ease-linear select-none"
           draggable="false"
         />
       </div>
     );
   };
+
+  const SLIDE_WIDTH_HEIGHT_RATIO = 0.467375;
 
   return (
     <Swiper
@@ -124,11 +126,19 @@ function Carousel(props) {
       }}
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
-      className="w-[130rem] h-auto xl:m-10 sm:m-0 cursor-grab h-96 select-none"
-      style={{
-        overflow: "visible",
-        left: "49%",
-        transform: "translateX(-50.7%)",
+      className="w-[130rem] h-auto xl:m-10 sm:m-0 cursor-grab  select-none"
+      style={size.width <= 920 ? {
+          // setting dynamic slide minHeight from slide width (80% of the screen width)
+          minHeight: size.width * 0.8 * SLIDE_WIDTH_HEIGHT_RATIO + "px",
+          overflow: "visible",
+          left: "49%",
+          transform: "translateX(-50.7%)",
+      } : {
+          // setting minHeight to avoid the carousel to be too small and screwing up the layout
+          minHeight: 383.63 + "px",
+          overflow: "visible",
+          left: "49%",
+          transform: "translateX(-50.7%)",
       }}
     >
       {games.map((game, index) => {
