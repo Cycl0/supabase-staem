@@ -128,19 +128,23 @@ function Carousel(props) {
       scrollbar={{ draggable: true }}
       className="w-[130rem] h-auto xl:m-10 sm:m-0 cursor-grab select-none"
       // duplicating style objects otherwise values won't be updated
-      style={size.width <= 920 ? {
-          // setting dynamic slide minHeight from slide width (80% of the screen width)
-          minHeight: size.width * 0.8 * SLIDE_WIDTH_HEIGHT_RATIO + "px",
-          overflow: "visible",
-          left: "49%",
-          transform: "translateX(-50.7%)",
-      } : {
-          // setting minHeight to avoid the carousel to be too small and screwing up the layout
-          minHeight: 383.63 + "px",
-          overflow: "visible",
-          left: "49%",
-          transform: "translateX(-50.7%)",
-      }}
+      style={
+        size.width <= 920
+          ? {
+              // setting dynamic slide minHeight from slide width (80% of the screen width)
+              minHeight: size.width * 0.8 * SLIDE_WIDTH_HEIGHT_RATIO + "px",
+              overflow: "visible",
+              left: "50%",
+              transform: `translateX(calc(-50% - ${size.width / 40}px))`,
+            }
+          : {
+              // setting minHeight to avoid the carousel to be too small and screwing up the layout
+              minHeight: 383.63 + "px",
+              overflow: "visible",
+              left: "49%",
+              transform: "translateX(-50.7%)",
+            }
+      }
     >
       {games.map((game, index) => {
         return (
