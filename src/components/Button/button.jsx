@@ -17,8 +17,7 @@ const StyledButton = (props) => {
         transition: "all 0.3s ease-in-out",
         transitionProperty: "opacity, transform",
         "&:hover": {
-          opacity: "0.8",
-          transform: "scale(1.05)",
+          opacity: "0.7",
         },
       })}
     >

@@ -1,0 +1,12 @@
+.search input {
+  transition: all 0.3s ease;
+  &:focus {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #000;
+  }
+
+  &:hover {
+    filter: brightness(1.2);
+  }
+}

@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* transparent scrollbar */
+*::-webkit-scrollbar {
+  width: 16px;
+  background: rgba(23, 32, 45, 0.9);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #214B6B;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -26,7 +36,6 @@ code {
 */
 html,
 body {
-  height: 100%;
   overflow-x: hidden;
 }
 /*
@@ -40,14 +49,15 @@ body {
   text-rendering: optimizeLegibility;
   background: #1b2837;
   background: radial-gradient(
-    circle,
-    rgb(105, 120, 138) 0%,
-    rgb(86, 106, 133) 5%,
-    rgb(78, 99, 128) 10%,
-    rgb(61, 82, 109) 20%,
-    rgb(47, 67, 94) 30%,
-    rgb(14, 23, 35) 100%
-  );
+      circle,
+      rgb(105, 120, 138) 0%,
+      rgb(86, 106, 133) 5%,
+      rgb(78, 99, 128) 10%,
+      rgb(61, 82, 109) 20%,
+      rgb(47, 67, 94) 30%,
+      rgb(14, 23, 35) 100%
+    )
+    center center fixed no-repeat;
 }
 /*
   6. Improve media defaults

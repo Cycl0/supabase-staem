@@ -11,6 +11,8 @@
     "@testing-library/user-event": "^13.5.0",
     "autoprefixer": "^10.4.5",
     "axios": "^0.26.1",
+    "lodash.debounce": "^4.0.8",
+    "lodash.throttle": "^4.1.1",
     "postcss": "^8.4.12",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
@@ -27,10 +29,17 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": ["react-app", "react-app/jest"]
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",

@@ -126,7 +126,7 @@ function Carousel(props) {
       }}
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
-      className="w-[130rem] h-auto xl:m-10 sm:m-0 cursor-grab select-none"
+      className="w-[130rem] h-auto mb-20 xl:mt-10 sm:mt-10 cursor-grab select-none"
       // duplicating style objects otherwise values won't be updated
       style={
         size.width <= 920
@@ -148,24 +148,22 @@ function Carousel(props) {
     >
       {games.map((game, index) => {
         return (
-          <MakeAnimated animation="ripple" color="#fff" size={2} delay={500}>
-            <SwiperSlide
-              key={index}
-              className="cursor-pointer h-full flex justify-center items-center"
-            >
-              {({ isActive, isNext, isVisible }) => {
-                if (isVisible) {
-                  if (isActive) {
-                    return activeSlide(game);
-                  } else if (isNext) {
-                    return nextSlide(game);
-                  } else {
-                    return prevSlide(game);
-                  }
+          <SwiperSlide
+            key={index}
+            className="cursor-pointer h-full flex justify-center items-center"
+          >
+            {({ isActive, isNext, isVisible }) => {
+              if (isVisible) {
+                if (isActive) {
+                  return activeSlide(game);
+                } else if (isNext) {
+                  return nextSlide(game);
+                } else {
+                  return prevSlide(game);
                 }
-              }}
-            </SwiperSlide>
-          </MakeAnimated>
+              }
+            }}
+          </SwiperSlide>
         );
       })}
     </Swiper>

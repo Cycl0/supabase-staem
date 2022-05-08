@@ -1,44 +1,94 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
+import debounce from "lodash.debounce";
+import getGames from "./getGames";
+import useInfiniteScroll from "./hooks/useInfiniteScroll";
 import { Text, Title } from "@mantine/core";
-import AppShell from "./components/Appshell/appshell.jsx";
+import AppShell from "./components/Appshell/appshell";
 import Header from "./components/Header/header";
 import Button from "./components/Button/button";
 import { ReactComponent as InstallIcon } from "./assets/installIcon.svg";
 import Carousel from "./components/Carousel/carousel";
+import Search from "./components/Search/search";
+import GamesList from "./components/GamesList/gamesList";
 
 const App = () => {
-  const [data, setData] = useState([]);
-  const [carouselGames, setCarouselGames] = useState([]);
+  const [gamesBundle, setGamesBundle] = useState(getGames(10, "title"));
+
   const [loading, setLoading] = useState(false);
 
+  const [games, setGames] = useState([]);
+  const [carouselGames, setCarouselGames] = useState([]);
+
   useEffect(() => {
-    fetchData();
+    fetchInitialGames();
   }, []);
 
-  const fetchData = async () => {
+  const [search, setSearch] = useState("");
+  const [sort, setSort] = useState("title");
+
+  useEffect(() => {
+    if (search || sort) {
+      setGamesBundle(getGames(10, sort, search));
+    }
+  }, [search, sort]);
+
+  useEffect(() => {
+    fetchFilteredGames();
+  }, [gamesBundle]);
+
+  const fetchFilteredGames = debounce(async () => {
+    const gamesList = await gamesBundle.next();
+    const games = gamesList.value;
+    setGames(games);
+  }, 500);
+
+  const onSearchHandler = (event) => {
+    setSearch(event.target.value);
+  };
+
+  const fetchInitialGames = async () => {
     try {
       setLoading(true);
 
-      let { data, error, status } = await supabase.from("steam").select("*");
+      const gamesList = await gamesBundle.next();
+      const games = gamesList.value;
 
-      if (error && status !== 406) {
-        throw error;
-      }
-
-      if (data.length) {
-        const games = sortById(data);
-        setData(games);
-        const randomGames = getRandomGames(data, 6);
+      if (games) {
+        setGames(games);
+        const randomGames = getRandomGames(games, 6);
         setCarouselGames(randomGames);
-        console.log(games);
       }
     } catch (error) {
-      alert(error.message);
+      console.error(error.message);
     } finally {
       setLoading(false);
     }
   };
+
+  const fetchMoreGames = async () => {
+    try {
+      const gamesList = await gamesBundle.next();
+      let games = gamesList.value;
+      if (games) {
+        setGames(games);
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreGames, 600);
+
+  const [isLoadingGames, setIsLoadingGames] = useState(false);
+
+  useEffect(() => {
+    if (isFetching) {
+      setIsLoadingGames(true);
+    } else {
+      setIsLoadingGames(false);
+    }
+  }, [isFetching]);
 
   const getRandomGames = (games, numGames) => {
     let uniqueIndexList = [];
@@ -67,9 +117,7 @@ const App = () => {
       loading={loading}
       header={
         <Header>
-          <Title
-            style={{ fontWeight: "700", fontSize: "40px", color: "white" }}
-          >
+          <Title sx={{ fontWeight: "700", fontSize: "40px", color: "white" }}>
             STAEM
           </Title>
           <Button
@@ -84,6 +132,19 @@ const App = () => {
       }
     >
       <Carousel games={carouselGames} />
+
+      <div className="flex flex-column items-center relative mb-8">
+        {/* Divisor */}
+        <div className="w-36 h-3 absolute -left-40 rounded-2xl bg-[#214B6B]" />
+        <Title sx={{ fontWeight: "700", fontSize: "40px", color: "white" }}>
+          New & Trending
+        </Title>
+        {/* Divisor */}
+        <div className="w-36 h-3 ml-4 rounded-2xl bg-[#214B6B]" />
+      </div>
+
+      <Search onSearch={onSearchHandler} setSort={setSort} sort={sort} />
+      <GamesList games={games} isLoadingGames={isLoadingGames} />
     </AppShell>
   );
 };

@@ -18,11 +18,14 @@ function CustomAppshell(props) {
       <LoadingOverlay
         loaderProps={{
           size: "xl",
-          color: theme.colors.primary[12],
+          color: "white",
           variant: "bars",
         }}
-        overlayOpacity={0.1}
-        overlayColor={theme.colors.primary[12]}
+        sx={{
+          position: "fixed",
+        }}
+        overlayOpacity={0.6}
+        overlayColor="white"
         visible={loading}
       />
       {children}
