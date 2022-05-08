@@ -42,9 +42,7 @@ const App = () => {
   }, [gamesBundle]);
 
   const debouncedFetch = debounce(async () => {
-    const gamesList = await gamesBundle.next();
-    const games = gamesList.value;
-    setGames(games);
+    fetchMoreGames();
   }, 500);
 
   const onSearchHandler = (event) => {
@@ -88,7 +86,7 @@ const App = () => {
     }
   };
 
-  const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreGames, 600);
+  const [isFetching, setIsFetching] = useInfiniteScroll(debouncedFetch, 1000);
 
   const [isLoadingGames, setIsLoadingGames] = useState(false);
 
