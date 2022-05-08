@@ -1,4 +1,4 @@
-import { Header, Grid } from "@mantine/core";
+import { Header } from "@mantine/core";
 
 function CustomHeader(props) {
   const { children } = props;
@@ -6,19 +6,15 @@ function CustomHeader(props) {
     <Header
       height={160}
       pt="xs"
+      className="mb-8 xs:mb-0"
       sx={{
         background: "transparent",
         border: "none",
       }}
     >
-      <Grid
-        justify="space-between"
-        align="center"
-        p="xl"
-        style={{ height: "100%" }}
-      >
+      <div className="h-full flex flex-col xs:flex-row justify-evenly xs:justify-between items-center px-4">
         {children}
-      </Grid>
+      </div>
     </Header>
   );
 }

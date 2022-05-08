@@ -86,7 +86,7 @@ const App = () => {
     }
   };
 
-  const [isFetching, setIsFetching] = useInfiniteScroll(debouncedFetch, 1000);
+  const [isFetching, setIsFetching] = useInfiniteScroll(debouncedFetch, 3000);
 
   const [isLoadingGames, setIsLoadingGames] = useState(false);
 
