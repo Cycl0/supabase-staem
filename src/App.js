@@ -136,7 +136,10 @@ const App = () => {
       <div className="flex flex-column items-center relative mb-8">
         {/* Divisor */}
         <div className="w-36 h-3 absolute -left-40 rounded-2xl bg-[#214B6B]" />
-        <Title sx={{ fontWeight: "700", fontSize: "40px", color: "white" }}>
+        <Title
+          className="min-w-[14rem] text-[1.75rem] sm:text-[2.5rem]"
+          sx={{ fontWeight: "700", color: "white" }}
+        >
           New & Trending
         </Title>
         {/* Divisor */}

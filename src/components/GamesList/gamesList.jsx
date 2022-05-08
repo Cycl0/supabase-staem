@@ -38,7 +38,7 @@ function GameList(props) {
               />
             </MakeAnimated>
 
-            <div className="max-w-md mt-6 xl:mt-12 ml-12">
+            <div className="max-w-md mt-6 xl:mt-12 xl:ml-12 flex flex-col items-center text-center xl:text-left xl:inline-block">
               <Title
                 sx={{
                   fontSize: "1.8rem",

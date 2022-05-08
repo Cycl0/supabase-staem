@@ -22,7 +22,7 @@ function Search(props) {
         }}
       />
       <div className="mt-2 sm:mt-0 flex flex-column">
-        <span className="mr-0 sm:mr-4 text-white flex items-center flex-nowrap">
+        <span className="min-w-[84px] mr-0 sm:mr-4 text-white flex items-center">
           Sort by:
         </span>
         <Select
