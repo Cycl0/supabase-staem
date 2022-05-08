@@ -103,11 +103,11 @@ function Carousel(props) {
       slidesPerView={3}
       spaceBetween={470}
       rewind={true}
-      //autoplay={{
-      //delay: 3500,
-      //disableOnInteraction: false,
-      //pauseOnMouseEnter: true,
-      //}}
+      autoplay={{
+        delay: 3500,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      }}
       onSlideChange={() => {
         setIsCurrent(false);
         // wait for animation to finish
