@@ -32,9 +32,8 @@ function Search(props) {
           size="md"
           className="w-[245] sm:w-[480]"
           data={[
-            { value: "id", label: "ID" },
-            { value: "price", label: "Price" },
             { value: "title", label: "Name" },
+            { value: "id", label: "ID" },
           ]}
         />
       </div>

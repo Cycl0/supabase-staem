@@ -34,10 +34,14 @@ const App = () => {
   }, [search, sort]);
 
   useEffect(() => {
-    fetchFilteredGames();
+    setIsFetching(true);
+    debouncedFetch();
+    return () => {
+      debouncedFetch.cancel();
+    };
   }, [gamesBundle]);
 
-  const fetchFilteredGames = debounce(async () => {
+  const debouncedFetch = debounce(async () => {
     const gamesList = await gamesBundle.next();
     const games = gamesList.value;
     setGames(games);
@@ -69,7 +73,13 @@ const App = () => {
   const fetchMoreGames = async () => {
     try {
       const gamesList = await gamesBundle.next();
+
+      if (!gamesList.length) {
+        setIsFetching(false);
+      }
+
       let games = gamesList.value;
+
       if (games) {
         setGames(games);
       }
@@ -104,12 +114,6 @@ const App = () => {
     }
 
     return listRandomGames;
-  };
-
-  const sortById = (games) => {
-    return games.sort((a, b) => {
-      return a.id - b.id;
-    });
   };
 
   return (

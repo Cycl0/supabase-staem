@@ -2,14 +2,17 @@ import React, { useState, useEffect } from "react";
 import throttle from "lodash.throttle";
 
 const useInfiniteScroll = (callback, heightOffset) => {
-  const [isFetching, setIsFetching] = useState(false);
+  const [isBottom, setIsBottom] = useState(false);
+  const [isFetching, setIsFetching] = useState(true);
 
   const handleScroll = () => {
     const currentView = window.innerHeight + window.scrollY;
     const endOfPage = document.documentElement.offsetHeight;
     const isBottomReached = currentView + heightOffset >= endOfPage;
-    if (isBottomReached && !isFetching) {
-      setIsFetching(true);
+    if (isBottomReached) {
+      setIsBottom(true);
+    } else {
+      setIsBottom(false);
     }
   };
 
@@ -35,11 +38,10 @@ const useInfiniteScroll = (callback, heightOffset) => {
   }, []);
 
   useEffect(() => {
-    if (isFetching) {
+    if (isBottom && isFetching) {
       callback();
-      setIsFetching(false);
     }
-  }, [isFetching]);
+  }, [isBottom]);
 
   return [isFetching, setIsFetching];
 };
