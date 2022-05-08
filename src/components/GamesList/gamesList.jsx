@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Text, Title, Loader, useMantineTheme } from "@mantine/core";
 import { MakeAnimated } from "../Animation/animation";
 import { ReactComponent as WindowsIcon } from "../../assets/windowsIcon.svg";

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { supabase } from "./supabaseClient";
 import debounce from "lodash.debounce";
 import getGames from "./getGames";
 import useInfiniteScroll from "./hooks/useInfiniteScroll";
@@ -12,8 +11,9 @@ import Carousel from "./components/Carousel/carousel";
 import Search from "./components/Search/search";
 import GamesList from "./components/GamesList/gamesList";
 
+const numGames = 10;
 const App = () => {
-  const [gamesBundle, setGamesBundle] = useState(getGames(10, "title"));
+  const [gamesBundle, setGamesBundle] = useState(getGames(numGames, "title"));
 
   const [loading, setLoading] = useState(false);
 
@@ -29,7 +29,7 @@ const App = () => {
 
   useEffect(() => {
     if (search || sort) {
-      setGamesBundle(getGames(10, sort, search));
+      setGamesBundle(getGames(numGames, sort, search));
     }
   }, [search, sort]);
 
@@ -74,14 +74,14 @@ const App = () => {
     try {
       const gamesList = await gamesBundle.next();
 
-      if (!gamesList.length) {
+      let gamesValue = gamesList.value;
+
+      if (gamesValue.length - games.length < numGames) {
         setIsFetching(false);
       }
 
-      let games = gamesList.value;
-
-      if (games) {
-        setGames(games);
+      if (gamesValue) {
+        setGames(gamesValue);
       }
     } catch (error) {
       console.error(error.message);

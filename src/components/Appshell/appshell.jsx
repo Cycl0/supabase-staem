@@ -1,19 +1,17 @@
-import React, { useState } from "react";
-import { AppShell, useMantineTheme, LoadingOverlay } from "@mantine/core";
+import { AppShell, LoadingOverlay } from "@mantine/core";
 
 function CustomAppshell(props) {
   const { children, header, loading } = props;
-  const theme = useMantineTheme();
   return (
     <AppShell
       padding="md"
       header={header}
-      sx={(theme) => ({
+      sx={{
         maxWidth: "95%",
         margin: "0 auto",
         minHeight: "100vh",
         paddingBottom: "140px",
-      })}
+      }}
     >
       <LoadingOverlay
         loaderProps={{

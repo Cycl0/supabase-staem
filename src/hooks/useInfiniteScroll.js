@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import throttle from "lodash.throttle";
 
 const useInfiniteScroll = (callback, heightOffset) => {
@@ -35,7 +35,7 @@ const useInfiniteScroll = (callback, heightOffset) => {
         capture: true,
       });
     };
-  }, []);
+  }, [throttledHandleScroll]);
 
   useEffect(() => {
     if (isBottom && isFetching) {

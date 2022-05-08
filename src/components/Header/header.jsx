@@ -1,17 +1,15 @@
-import React, { useState } from "react";
-import { Header, Grid, useMantineTheme } from "@mantine/core";
+import { Header, Grid } from "@mantine/core";
 
 function CustomHeader(props) {
   const { children } = props;
-  const theme = useMantineTheme();
   return (
     <Header
       height={160}
       pt="xs"
-      sx={(theme) => ({
+      sx={{
         background: "transparent",
         border: "none",
-      })}
+      }}
     >
       <Grid
         justify="space-between"

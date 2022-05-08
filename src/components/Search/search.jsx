@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import { TextInput, Select, useMantineTheme } from "@mantine/core";
+import { TextInput, Select } from "@mantine/core";
 import "./search.scss";
 
 function Search(props) {
   const { onSearch, setSort, sort } = props;
-  const theme = useMantineTheme();
   return (
     <div
       className="search w-[95%] sm:flex justify-between align-center font-bold"
