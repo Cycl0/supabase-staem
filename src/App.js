@@ -53,9 +53,8 @@ const App = () => {
     try {
       setLoading(true);
 
-      const gamesList = await gamesBundle.next();
-      const games = gamesList.value;
-
+      const bundle = await gamesBundle.next();
+      const { gamesList: games } = bundle.value;
       if (games) {
         setGames(games);
         const randomGames = getRandomGames(games, 6);
@@ -70,11 +69,10 @@ const App = () => {
 
   const fetchMoreGames = async () => {
     try {
-      const gamesList = await gamesBundle.next();
+      const bundle = await gamesBundle.next();
+      const { gamesList: gamesValue, numEntries } = bundle.value;
 
-      let gamesValue = gamesList.value;
-
-      if (gamesValue.length - games.length < numGames) {
+      if (numEntries < numGames) {
         setIsFetching(false);
       }
 

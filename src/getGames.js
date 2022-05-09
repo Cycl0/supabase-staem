@@ -48,7 +48,8 @@ async function* getGames(...args) {
 
       games = games.concat(data);
 
-      yield games;
+      let bundle = { gamesList: games, numEntries: data.length };
+      yield bundle;
     }
   }
 
